@@ -11,7 +11,7 @@ This is a fork of Gilly Bar's [fluent-regex](https://github.com/gillyb/fluent-re
 Here are a few examples for you to see the syntax :  
 
 **American phone number:**
-
+```ts
     // RegExp syntax
     const r = /(\(\d{3}\)-)?\d{3}-\d{4}/g;
 
@@ -22,9 +22,9 @@ Here are a few examples for you to see the syntax :
         "-",
         RegexLiteral.anyDigit().exactAmount(4)
     );
-
+```
 **Simple email validation:** *NOTE: This isn't a real valid email check according to the official spec, so don't use this as-is*
-
+```ts
     // RegExp syntax
     const r =
         /(\d|[a-zA-Z]|\.|\+|\(|\)){2,}@(\d|[a-zA-Z]|\.|\+|\(|\)){2,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?/;
@@ -52,9 +52,9 @@ Here are a few examples for you to see the syntax :
         RegexLiteral.anyLetter().atLeastAmount(2),
         regexSequence(".", RegexLiteral.anyLetter().atLeastAmount(2)).optional()
     );
-
+```
 **Some very simple, other use cases:**  
-
+```ts
     // Searching for my first name, and optional last name
     const regex = new RegExp("gilly( barr)?", "i");
     const fluentRegex = regexSequence("gilly", optional(" barr")).toRegex(
@@ -69,7 +69,7 @@ Here are a few examples for you to see the syntax :
         RegexLiteral.anyDigit().exactAmount(3),
         ")"
     );
-
+```
 # Installing  
 ```
 npm install fluent-regex-fun
