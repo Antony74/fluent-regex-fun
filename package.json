@@ -4,9 +4,13 @@
   "description": "A simple, type-safe, fluent api to construct regular expressions (and no dependencies!)",
   "homepage": "https://github.com/Antony74/fluent-regex-fun",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "author": "Gilly Barr",
+  "contributors": [
+    "Antony74"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
