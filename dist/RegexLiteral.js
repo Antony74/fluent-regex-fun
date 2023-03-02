@@ -51,3 +51,4 @@ const anyCharacterExceptNewline = () => {
     return (0, exports.regexLiteral)('.', { escapeSpecialCharacters: false });
 };
 exports.anyCharacterExceptNewline = anyCharacterExceptNewline;
+//# sourceMappingURL=RegexLiteral.js.map

@@ -38,3 +38,4 @@ const Regex = __importStar(require("./Regex"));
 exports.Regex = Regex;
 const Not_1 = require("./Not");
 Object.defineProperty(exports, "not", { enumerable: true, get: function () { return Not_1.not; } });
+//# sourceMappingURL=index.js.map

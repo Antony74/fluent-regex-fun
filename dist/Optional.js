@@ -12,3 +12,4 @@ const optional = (regex) => {
     return component;
 };
 exports.optional = optional;
+//# sourceMappingURL=Optional.js.map

@@ -75,3 +75,4 @@ const regexComponentWithState = (state) => {
     };
     return component;
 };
+//# sourceMappingURL=RegexComponent.js.map

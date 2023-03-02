@@ -1,0 +1,1 @@
+{"version":3,"file":"RegexFlags.js","sourceRoot":"","sources":["../src/RegexFlags.ts"],"names":[],"mappings":";;;AAAA,qGAAqG;AACrG,IAAY,UAMX;AAND,WAAY,UAAU;IAClB,0BAAY,CAAA,CAAC,4DAA4D;IACzE,+BAAiB,CAAA,CAAC,yEAAyE;IAC3F,6BAAe,CAAA,CAAC,kFAAkF;IAClG,2BAAa,CAAA,CAAC,yDAAyD;IACvE,0BAAY,CAAA,CAAC,wHAAwH;AACzI,CAAC,EANW,UAAU,GAAV,kBAAU,KAAV,kBAAU,QAMrB"}

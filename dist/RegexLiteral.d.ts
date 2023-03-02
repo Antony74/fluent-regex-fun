@@ -1,0 +1,121 @@
+import { RegexComponent } from './RegexComponent';
+export interface RegexLiteralConfiguration {
+    escapeSpecialCharacters?: boolean;
+}
+export declare const regexLiteral: (regexString: string, { escapeSpecialCharacters }?: RegexLiteralConfiguration) => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyDigit: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyNonDigit: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyLetter: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyWhitespace: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyNonWhitespace: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyWordCharacter: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyNonWordCharacter: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};
+export declare const anyCharacterExceptNewline: () => {
+    getRegexQuantifier(): string;
+    optional: () => RegexComponent;
+    onceOrMore: () => RegexComponent;
+    zeroOrMore: () => RegexComponent;
+    exactAmount: (amount: number) => RegexComponent;
+    atLeastAmount: (amount: number) => RegexComponent;
+    rangeAmount: (min: number, max: number) => RegexComponent;
+    upToAmount: (amount: number) => RegexComponent;
+    needsWrapping: (regexString: string) => boolean;
+    toRegex: (...flags: import("./RegexFlags").RegexFlags[]) => RegExp;
+    toRegexString: () => string;
+};

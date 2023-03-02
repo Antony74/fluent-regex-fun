@@ -30,3 +30,4 @@ const regexSequenceWithState = (state, ...components) => {
         } });
     return component;
 };
+//# sourceMappingURL=RegexSequence.js.map

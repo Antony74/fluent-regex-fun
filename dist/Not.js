@@ -10,3 +10,4 @@ const not = (regex) => {
     return component;
 };
 exports.not = not;
+//# sourceMappingURL=Not.js.map

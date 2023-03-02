@@ -10,3 +10,4 @@ var RegexFlags;
     RegexFlags["UNICODE"] = "u"; /** Treat pattern as a sequence of unicode code points */
     RegexFlags["STICKY"] = "y"; /** matches only from the index indicated by the 'lastIndex' property of this regular expression in the target string */
 })(RegexFlags = exports.RegexFlags || (exports.RegexFlags = {}));
+//# sourceMappingURL=RegexFlags.js.map
