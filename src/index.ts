@@ -1,15 +1,9 @@
-import RegexLiteral from "./RegexLiteral";
-import RegexSequence from "./RegexSequence";
-import Group from "./Group";
-import Optional from "./Optional";
-import Or from "./Or";
-import { Regex } from "./Regex";
+import { regexLiteral } from './RegexLiteral';
+import { regexSequence } from './RegexSequence';
+import { group } from './Group';
+import { optional } from './Optional';
+import { or } from './Or';
+import * as Regex from './Regex';
+import { not } from './Not';
 
-export {
-  Regex,
-  RegexLiteral,
-  RegexSequence,
-  Or,
-  Optional,
-  Group
-};
+export { Regex, regexLiteral, regexSequence, or, optional, group, not };

@@ -1,16 +1,17 @@
-import RegexComponent from './RegexComponent';
+import {
+    RegexComponent,
+    regexComponent,
+    RegexStringCallback,
+} from './RegexComponent';
 
-export default class Not extends RegexComponent {
+export const not = (regex: RegexComponent) => {
+    const regexStringCallback: RegexStringCallback = (
+        baseComponent: RegexComponent
+    ): string => {
+        return `[^${regex.toRegexString()}]${baseComponent.getRegexQuantifier()}`;
+    };
 
-  private regex: RegexComponent;
+    const component = { ...regexComponent({ regexStringCallback }) };
 
-  constructor(regex: RegexComponent) {
-    super();
-    this.regex = regex;
-  }
-
-  toRegexString = () => {
-    return `[^${this.regex.toRegexString()}]`;
-  }
-
-}
+    return component;
+};

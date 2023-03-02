@@ -1,28 +1,41 @@
-import RegexComponent from "./RegexComponent";
-import RegexLiteral from "./RegexLiteral";
+import {
+    RegexComponent,
+    regexComponent,
+    RegexStringCallback,
+} from './RegexComponent';
+import { regexLiteral } from './RegexLiteral';
 
-export default class Or extends RegexComponent {
-
-  private regexComponents: RegexComponent[];
-  private groupName: string;
-
-  constructor(...components: (RegexComponent | string)[]) {
-    super();
-    this.regexComponents = components.map(r => {
-      if (typeof r === 'string')
-        return new RegexLiteral(r)
-      return r;
-    });
-  }
-
-  withGroupName = (name: string) => {
-    this.groupName = name;
-    return this;
-  }
-
-  toRegexString = () => {
-    const name = this.groupName ? `?<${this.groupName}>` : '';
-    return `(${name}${this.regexComponents.map(r => r.toRegexString()).join('|')})${this.regexQuantifier ? this.regexQuantifier : ''}`;
-  };
-
+interface OrState {
+    groupName: string;
 }
+
+export const or = (...components: (RegexComponent | string)[]) =>
+    orWithState({ groupName: '' }, ...components);
+
+const orWithState = (
+    state: OrState,
+    ...components: (RegexComponent | string)[]
+) => {
+    const regexComponents = components.map((r) => {
+        if (typeof r === 'string') return regexLiteral(r);
+        return r;
+    });
+
+    const regexStringCallback: RegexStringCallback = (
+        baseComponent: RegexComponent
+    ): string => {
+        const name = state.groupName ? `?<${state.groupName}>` : '';
+        return `(${name}${regexComponents
+            .map((r) => r.toRegexString())
+            .join('|')})${baseComponent.getRegexQuantifier()}`;
+    };
+
+    const component = {
+        ...regexComponent({ regexStringCallback }),
+        withGroupName: (groupName: string) => {
+            return orWithState({ groupName }, ...components);
+        },
+    };
+
+    return component;
+};

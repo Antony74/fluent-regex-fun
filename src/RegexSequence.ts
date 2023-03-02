@@ -1,37 +1,60 @@
-import RegexComponent from './RegexComponent';
-import RegexLiteral from './RegexLiteral';
+import {
+    RegexComponent,
+    regexComponent,
+    RegexStringCallback,
+} from './RegexComponent';
+import { regexLiteral } from './RegexLiteral';
 
-export default class RegexSequence extends RegexComponent {
-
-  private regexComponents: RegexComponent[];
-  private beginning = false;
-  private end = false;
-
-  constructor(...components: (RegexComponent | string)[]) {
-    super();
-    this.regexComponents = components.map(r => {
-      if (typeof r === 'string')
-        return new RegexLiteral(r);
-      return r;
-    })
-  }
-
-  startsWith = () => {
-    this.beginning = true;
-    return this;
-  };
-  endsWith = () => {
-    this.end = true;
-    return this;
-  };
-
-  toRegexString = () => {
-    const startsWith = this.beginning ? '^' : '';
-    const endsWith = this.end ? '$' : '';
-    const finalRegex = this.regexComponents.map(r => r.toRegexString()).join('');
-    if (!this.regexQuantifier)
-      return `${startsWith}${finalRegex}${endsWith}`;
-    return `${startsWith}(${finalRegex})${this.regexQuantifier}${endsWith}`;
-  };
-
+interface RegexSequeceState {
+    beginning: boolean;
+    end: boolean;
 }
+
+export const regexSequence = (...components: (RegexComponent | string)[]) =>
+    regexSequenceWithState({ beginning: false, end: false }, ...components);
+
+const regexSequenceWithState = (
+    state: RegexSequeceState,
+    ...components: (RegexComponent | string)[]
+) => {
+    const regexComponents = components.map((r) => {
+        if (typeof r === 'string') return regexLiteral(r);
+        return r;
+    });
+
+    const regexStringCallback: RegexStringCallback = (
+        baseComponent: RegexComponent = component
+    ): string => {
+        const startsWith = state.beginning ? '^' : '';
+        const endsWith = state.end ? '$' : '';
+
+        const finalRegex = regexComponents
+            .map((r) => {
+                return r.toRegexString();
+            })
+            .join('');
+
+        if (!baseComponent.getRegexQuantifier())
+            return `${startsWith}${finalRegex}${endsWith}`;
+
+        return `${startsWith}(${finalRegex})${baseComponent.getRegexQuantifier()}${endsWith}`;
+    };
+
+    const component = {
+        ...regexComponent({ regexStringCallback }),
+        startsWith: () => {
+            return regexSequenceWithState(
+                { ...state, beginning: true },
+                ...components
+            );
+        },
+        endsWith: () => {
+            return regexSequenceWithState(
+                { ...state, end: true },
+                ...components
+            );
+        },
+    };
+
+    return component;
+};

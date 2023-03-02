@@ -1,61 +1,71 @@
-import RegexComponent from "./RegexComponent";
+import {
+    RegexComponent,
+    regexComponent,
+    RegexStringCallback,
+} from './RegexComponent';
 
 export interface RegexLiteralConfiguration {
-  escapeSpecialCharacters?: boolean;
+    escapeSpecialCharacters?: boolean;
 }
+
 const defaultConfig = {
-  escapeSpecialCharacters: true
+    escapeSpecialCharacters: true,
 };
 
-export default class RegexLiteral extends RegexComponent {
+export const regexLiteral = (
+    regexString: string,
+    { escapeSpecialCharacters }: RegexLiteralConfiguration = defaultConfig
+) => {
+    const regexEscapeCharacters = /\.|\^|\$|\*|\+|\?|\(|\)|\[|\{|\}|\\|\|/g;
 
-  private regexString: string;
-  private options: RegexLiteralConfiguration = Object.assign({}, defaultConfig);
+    if (escapeSpecialCharacters)
+        regexString = regexString.replace(regexEscapeCharacters, '\\$&');
 
-  private regexEscapeCharacters = /\.|\^|\$|\*|\+|\?|\(|\)|\[|\{|\}|\\|\|/g;
+    const regexStringCallback: RegexStringCallback = (
+        baseComponent: RegexComponent
+    ): string => {
+        const q = baseComponent.getRegexQuantifier();
+        if (!baseComponent.needsWrapping(regexString))
+            return `${regexString}${q}`;
 
-  constructor(regexString: string, options?: RegexLiteralConfiguration) {
-    super();
-    Object.assign(this.options, options);
+        return `(${regexString})${q}`;
+    };
 
-    if (this.options.escapeSpecialCharacters)
-      this.regexString = regexString.replace(this.regexEscapeCharacters, '\\$&');
-    else
-      this.regexString = regexString;
-    return this;
-  }
+    const component = {
+        ...regexComponent({ regexStringCallback }),
+    };
 
-  static anyDigit() {
-    return new this('\\d', { escapeSpecialCharacters: false });
-  }
-  static anyNonDigit() {
-    return new this('\\D', { escapeSpecialCharacters: false });
-  }
-  static anyLetter() {
-    return new this('[a-zA-Z]', { escapeSpecialCharacters: false });
-  }
-  static anyWhitespace() {
-    return new this('\\s', { escapeSpecialCharacters: false });
-  }
-  static anyNonWhitespace() {
-    return new this('\\S', { escapeSpecialCharacters: false });
-  }
-  static anyWordCharacter() {
-    return new this('\\w', { escapeSpecialCharacters: false });
-  }
-  static anyNonWordCharacter() {
-    return new this('\\W', { escapeSpecialCharacters: false });
-  }
-  static anyCharacterExceptNewline() {
-    return new this('.', { escapeSpecialCharacters: false });
-  }
+    return component;
+};
 
-  toRegexString = () => {
-    const q = this.regexQuantifier ? this.regexQuantifier : '';
-    if (!this.needsWrapping(this.regexString))
-      return `${this.regexString}${q}`;
+export const anyDigit = () => {
+    return regexLiteral('\\d', { escapeSpecialCharacters: false });
+};
 
-    return `(${this.regexString})${q}`;
-  }
+export const anyNonDigit = () => {
+    return regexLiteral('\\D', { escapeSpecialCharacters: false });
+};
 
-}
+export const anyLetter = () => {
+    return regexLiteral('[a-zA-Z]', { escapeSpecialCharacters: false });
+};
+
+export const anyWhitespace = () => {
+    return regexLiteral('\\s', { escapeSpecialCharacters: false });
+};
+
+export const anyNonWhitespace = () => {
+    return regexLiteral('\\S', { escapeSpecialCharacters: false });
+};
+
+export const anyWordCharacter = () => {
+    return regexLiteral('\\w', { escapeSpecialCharacters: false });
+};
+
+export const anyNonWordCharacter = () => {
+    return regexLiteral('\\W', { escapeSpecialCharacters: false });
+};
+
+export const anyCharacterExceptNewline = () => {
+    return regexLiteral('.', { escapeSpecialCharacters: false });
+};
